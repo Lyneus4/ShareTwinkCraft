@@ -136,7 +136,7 @@ a {
   <span id="race">race</span> - <span id="realm">realm</span>
   <br />
   <br />
-  <a href="https://www.curseforge.com/wow/addons/shareyourbank/">get the add on</a> to share your own
+  <strong id="twinkcraft-title">Composants bruts cumulés</strong>
 </div>
 <div id="items"></div>
 <script>
@@ -153,9 +153,15 @@ const base62 = str => str
   : 0
 
 const params = Object.fromEntries(new URLSearchParams(location.search))
-document.getElementById('name').textContent = params.name
-document.getElementById('race').textContent = params.race
-document.getElementById('realm').textContent = params.realm
+document.getElementById('name').textContent = params.name || ''
+document.getElementById('race').textContent = params.race || ''
+document.getElementById('realm').textContent = params.realm || ''
+
+if (!params.name && !params.race && !params.realm) {
+  document.getElementById('name').style.display = 'none'
+  document.getElementById('race').style.display = 'none'
+  document.getElementById('realm').style.display = 'none'
+}
 
 const parse = i => {
   if (!i || i === '-') return null
@@ -236,7 +242,7 @@ if (hasGroupedItems) {
     createSection(title, params[key], columns)
   }
 } else if (params.items) {
-  createSection('Items', params.items, 4)
+  createSection('Composants bruts cumulés', params.items, 4)
 }
 
 </script>
